@@ -29,6 +29,12 @@ GY-61-kiihtyvyysanturi mittaa kiihtyvyyttä kolmella akselilla:
 
 Anturi tuottaa analogisia jännitesignaaleja, jotka luetaan nRF5340 DK:n ADC-muuntimella.
 
+## Projektin arkkitehtuuri
+
+Alla oleva kaavio kuvaa projektin laitteita, ohjelmistoja ja suunniteltuja tiedonsiirtoyhteyksiä.
+
+![Projektin arkkitehtuurikaavio](images/arkkitehtuurikuva.png)
+
 ## Tekijät
 
 Veeti Kokkonen
