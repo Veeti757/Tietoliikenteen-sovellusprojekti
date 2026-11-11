@@ -1,13 +1,28 @@
-/ {
+/*
+ * Copyright (c) 2026 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+ */
+
+
+ / {
     zephyr,user {
         io-channels = <&adc 0>, <&adc 1>, <&adc 2>;
     };
 };
 
+/*
+ * TrustZone SRAM split from devicetree (region_defs.h for TF-M). The secure image uses
+ * 48 KiB (0xc000) at the base of cpuapp SRAM (&sram0_s); NS RAM begins at 0x20000000 + 0xc000.
+ * &sram0_ns spans 0x74000 bytes; &sram0_ns_app is 0x64000 because the top 0x10000 (64 KiB)
+ * within that NS window is sram0_shared for application/network-core IPC
+ * (nrf5340_shared_sram_partition.dtsi), i.e. 0x64000 + 0x10000 == 0x74000.
+ */
 &adc {
     status = "okay";
     #address-cells = <1>;
     #size-cells = <0>;
+
     channel@0 {
         reg = <0>;
         zephyr,gain = "ADC_GAIN_1_6";
