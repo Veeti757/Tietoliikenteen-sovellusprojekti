@@ -148,13 +148,12 @@ int my_lbs_send_button_state_indicate(bool button_state)
 	return bt_gatt_indicate(NULL, &ind_params);
 }
 /* STEP 14 - Define the function to send notifications for the MYSENSOR characteristic */
-int my_lbs_send_sensor_notify(uint32_t sensor_value)
-{
-	if (!notify_mysensor_enabled) {
-		return -EACCES;
-	}
 
-	return bt_gatt_notify(NULL, &my_lbs_svc.attrs[7], 
-			      &sensor_value,
-			      sizeof(sensor_value));
+int my_lbs_send_sensor_notify(uint32_t suunta, uint32_t x, uint32_t y, uint32_t z)
+{
+    if (!notify_mysensor_enabled) {
+        return -EACCES;
+    }
+    uint32_t data[4] = {suunta, x, y, z};
+    return bt_gatt_notify(NULL, &my_lbs_svc.attrs[7], data, sizeof(data));
 }

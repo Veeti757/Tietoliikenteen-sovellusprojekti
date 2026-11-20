@@ -1,0 +1,25 @@
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD DROP
+
+#
+# IPv6 (same logic as with IPv4)
+#
+
+ip6tables -P INPUT DROP
+ip6tables -P OUTPUT ACCEPT
+ip6tables -P FORWARD DROP
+ip6tables -F INPUT
+ip6tables -F OUTPUT
+ip6tables -F FORWARD
+
+ip6tables -A INPUT -i lo -j ACCEPT
+ip6tables -A INPUT -p TCP --dport 22 -j ACCEPT
+
+ip6tables -A INPUT -m state --state  ESTABLISHED,RELATED -j ACCEPT
+ip6tables -A INPUT -p icmpv6 -j ACCEPT # ICMP6  autoconfig etc router advertisements
+ip6tables -A INPUT -j DROP
+
+ip6tables -P INPUT ACCEPT
+ip6tables -P OUTPUT ACCEPT
+ip6tables -P FORWARD DROP
+
