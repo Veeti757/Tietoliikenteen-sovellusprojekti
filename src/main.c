@@ -100,10 +100,7 @@ void send_data_thread(void)
                 printk("Mittaus %d: Suunta=%u X=%u Y=%u Z=%u\n",
                        i + 1, valittu_suunta, m.x, m.y, m.z);
 
-                my_lbs_send_sensor_notify(valittu_suunta);
-                my_lbs_send_sensor_notify(m.x);
-                my_lbs_send_sensor_notify(m.y);
-                my_lbs_send_sensor_notify(m.z);
+                my_lbs_send_sensor_notify(valittu_suunta, m.x, m.y, m.z);
 
                 k_sleep(K_MSEC(100));
             }
